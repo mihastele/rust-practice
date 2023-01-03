@@ -51,6 +51,21 @@ fn main() {
     for number in numbers.iter() {
         println!("{}", number)
     }
+
+    let primes: Vec<i32> = Vec::new();
+    let mut primes = vec![2, 3, 4, 8, 9, 6];
+
+    primes.push(7);
+    primes.remove(2);
+
+    /* Slices - pointers to certain amount of memory */
+    println!("{:?}", &numbers[1..3]); // second to third element
+
+    println!("{:?}", primes);
+
+    let mut colors = ["red", "pink", "gray", "blue"];
+    update_colors(&mut colors[2..4]);
+    println!("{:?}", colors);
 }
 
 // intorduction to functions
@@ -64,6 +79,12 @@ fn say_hi_mutable(name: &mut &str) -> String {
     println!("hello there {}", name);
     *name = "I changed it";
     return format!("{}", name);
+}
+
+// param - mutable array (through function) of strings
+fn update_colors(colors: &mut [&str]) {
+    colors[0] = "yellow";
+    colors[1] = "orange"
 }
 
 mod clean {
