@@ -1,5 +1,16 @@
 fn main() {
     println!("Hello, world!");
+
+    let x = 5;
+    let y = x; // copied
+
+    let v = vec![1, 2, 3];
+    let v2 = v; // transferred ownership
+
+    // println!("{}", v[0]); // error, v is no longer valid
+    // v no longer accessible
+    println!("{}", v2[0]);
+
 }
 
 
