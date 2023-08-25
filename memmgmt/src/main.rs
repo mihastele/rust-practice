@@ -1,3 +1,23 @@
+
+#[derive(Debug)]
+struct Person {
+    name: String
+}
+
+#[derive(Debug)]
+struct Dog<'l> {
+    name: String,
+    owner: &'l Person
+}
+
+
+impl Person {
+    fn get_name(&self) -> &String {
+        &self.name
+    }
+}
+
+
 fn main() {
     println!("Hello, world!");
 
@@ -11,6 +31,43 @@ fn main() {
     // v no longer accessible
     println!("{}", v2[0]);
 
+    let mut a = 6;
+
+    // mutable reference
+    let b = &mut a;
+    println!("{}", *b);
+    println!("{}", a);
+    // error because a has been returned above
+    // b += 2
+
+    // scope
+    {
+        let c = &mut a;
+        *c += 2;
+        println!("{}", *c);
+    }
+
+    let mut v = vec![1, 2, 3, 4, 5];
+    for i in &v {
+        println!("{}", i);
+
+        // Memory guarantee will not allow push operation on the same vector that is borrowed and pushed to
+        // v.push(6);
+
+    }
+
+    let p1 = Person { name: String::from("Alex1") };
+    let d1 = Dog { name: String::from("Fido"), owner: &p1 };
+
+    let mut a: &String;
+    {
+        let p2 = Person { name: String::from("Alex") };
+        // a = p2.get_name();
+        // a = p2.get_name();  // borrowed var does not live long enough
+        a = p1.get_name();
+    }
+
+    println!("{}", a);
 }
 
 
